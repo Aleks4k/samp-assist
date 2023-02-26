@@ -191,7 +191,7 @@ public OnPlayerSpawn(playerid)
 
 	#define OnPlayerDamageDone assist_OnPlayerDamageDone
 	#if defined assist_OnPlayerDamageDone
-		forward assist_OnPlayerDamageDone(&playerid, Float:amount, issuerid, weapon, bodypart);
+		forward assist_OnPlayerDamageDone(playerid, Float:amount, issuerid, weapon, bodypart);
 	#endif
 #else
 	public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
