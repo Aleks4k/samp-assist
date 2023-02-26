@@ -7,7 +7,7 @@
 	  This is an updated version of https://gist.github.com/billz0101/3002d3263bf082d137c9e45a2b3a050e made by billz0101 (as filterscript).
 	  Advice:
 		If your OnPlayerDamage/OnPlayerTakeDamage have return 0 (damage rejection) in gamemode/module,
-		I suggest you to #include this include at very end of your gamemode or after including your modules.
+		I suggest you to #include this include at very end of your gamemode or after including your modules. (If you are not using weapon-config)
 		Why? Well if you reject damage in some cases, it probably means that you dont want player to get assistention from rejected damage.
 	
 	Start Date:
@@ -148,7 +148,7 @@ public OnPlayerSpawn(playerid)
 #endif
 //==============================================================================//
 #if defined _INC_WEAPON_CONFIG
-	public OnPlayerDamage(&playerid, &Float:amount, &issuerid, &weapon, &bodypart)
+	public OnPlayerDamageDone(playerid, Float:amount, issuerid, weapon, bodypart)
 	{
 		if(issuerid != INVALID_PLAYER_ID){
 			new bool:recentlyAssisted;
@@ -177,21 +177,21 @@ public OnPlayerSpawn(playerid)
 				AssistInfo[playerid][slot][damageTick] = GetTickCount();
 			}
 		}
-		#if defined assist_OnPlayerDamage
-			return assist_OnPlayerDamage(playerid, Float:amount, issuerid, weapon, bodypart);
+		#if defined assist_OnPlayerDamageDone
+			return assist_OnPlayerDamageDone(playerid, Float:amount, issuerid, weapon, bodypart);
 		#else
 			return 1;
 		#endif
 	}
-	#if defined _ALS_OnPlayerDamage
-		#undef OnPlayerDamage
+	#if defined _ALS_OnPlayerDamageDone
+		#undef OnPlayerDamageDone
 	#else
-		#define _ALS_OnPlayerDamage
+		#define _ALS_OnPlayerDamageDone
 	#endif
 
-	#define OnPlayerDamage assist_OnPlayerDamage
-	#if defined assist_OnPlayerDamage
-		forward assist_OnPlayerDamage(&playerid, &Float:amount, &issuerid, &weapon, &bodypart);
+	#define OnPlayerDamageDone assist_OnPlayerDamageDone
+	#if defined assist_OnPlayerDamageDone
+		forward assist_OnPlayerDamageDone(&playerid, Float:amount, issuerid, weapon, bodypart);
 	#endif
 #else
 	public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
