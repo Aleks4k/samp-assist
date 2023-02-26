@@ -9,7 +9,7 @@ Works with every ***SA-MP*** version.
 
 1. `#include <assist>` 
 
-**Note:** If your `OnPlayerDamage`/`OnPlayerTakeDamage` have return 0 (damage rejection) in gamemode/module, I suggest you to `#include` at very end of your gamemode or after including your modules with damage rejection. (If you are not using `weapon-config`)
+**Note:** If your `OnPlayerDamageDone`/`OnPlayerTakeDamage` have return 0 (damage rejection) in gamemode/module, I suggest you to `#include` at very end of your gamemode or after including your modules with damage rejection. (If you are not using `weapon-config`)
 
 Why? Well if you reject damage in some cases, it probably means that you dont want player to get assistention from rejected damage.
 
